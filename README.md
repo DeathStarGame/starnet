@@ -3,6 +3,8 @@
 - turn-based game
 - inspired by HoMM3 AoE Hearthstone-BG 
 
+[merged into https://github.com/DeathStarGame/DeathStarGame]
+
 ## * archived
 
 - this repo is essentially building the game as a cloud-native system
