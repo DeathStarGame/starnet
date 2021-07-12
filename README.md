@@ -5,11 +5,6 @@
 
 [merged into https://github.com/DeathStarGame/DeathStarGame]
 
-## * archived
-
-- this repo is essentially building the game as a cloud-native system
-- code is kept for reference
-
 ## reference points
 
 - 2020-03-31 before one system
