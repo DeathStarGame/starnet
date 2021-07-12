@@ -6,7 +6,6 @@
   "directories": {
     "test": "test"
   },
-  "author": "https://github.com/accompanyinggames",
   "scripts": {
     "dev": "npx shadow-cljs -A:dev watch app;",
     "devcards": "shadow-cljs  -A:dev watch devcards",
