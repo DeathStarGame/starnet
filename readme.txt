@@ -1,11 +1,11 @@
-# starnet
+starnet
 
 - turn-based game
 - inspired by HoMM3 AoE Hearthstone-BG 
 
 [merged into https://github.com/DeathStarGame/DeathStarGame]
 
-## reference points
+reference points
 
 - 2020-03-31 before one system
   - https://github.com/DeathStarGame/starnet/tree/af86204ff94776ceab140208f5a6e0d654d30eba
