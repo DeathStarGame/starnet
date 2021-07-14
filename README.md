@@ -1,4 +1,4 @@
-starnet
+# starnet
 
 [merged into https://github.com/DeathStarGame/DeathStarGame]
 
