@@ -12,7 +12,6 @@
    
    [starnet.common.alpha.spec]
    [starnet.impl :refer [make-inst with-gen-fmap]]
-   [starnet.macros :refer [defmethod-set derive-set]]
    [clojure.test :as test :refer [is are run-all-tests testing deftest run-tests]]))
 
 

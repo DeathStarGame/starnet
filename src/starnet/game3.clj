@@ -13,9 +13,7 @@
 
    [starnet.common.alpha.spec]
 
-   [clojure.test :as test :refer [is are run-all-tests testing deftest run-tests]]
-   #?(:cljs [starnet.macros :refer-macros [defmethod-set derive-set]]
-      :clj  [starnet.macros :refer [defmethod-set derive-set]])))
+   [clojure.test :as test :refer [is are run-all-tests testing deftest run-tests]]))
 
 (s/def :g/uuid uuid?)
 (s/def :g/events (s/coll-of :ev/event))

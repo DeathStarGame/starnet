@@ -13,9 +13,7 @@
    [clojure.test :as test :refer [is are run-all-tests testing deftest run-tests]]
    [clojure.walk :as walk]
    [datascript.core :as d]
-   #?(:cljs [reagent.core :as r])
-   #?(:cljs [starnet.macros :refer-macros [defmethod-set derive-set]]
-      :clj  [starnet.macros :refer [defmethod-set derive-set]])))
+   #?(:cljs [reagent.core :as r])))
 
 
 

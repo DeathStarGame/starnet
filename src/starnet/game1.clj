@@ -7,8 +7,6 @@
    [clojure.test.check.generators :as gen]
    [clojure.test.check.properties :as prop]
    [starnet.impl :refer [make-inst with-gen-fmap]]
-   #?(:cljs [starnet.macros :refer-macros [defmethod-set]]
-      :clj  [starnet.macros :refer [defmethod-set]])
 
    [clojure.core.logic.nominal :exclude [fresh hash] :as nom]
    [clojure.core.logic :exclude [is] :as l :rename {== ?==} :refer :all]
