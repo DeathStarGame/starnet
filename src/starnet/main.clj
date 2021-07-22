@@ -4,7 +4,7 @@
                                      >!! <!! alt!! alts! alts!! take! put! mult tap untap
                                      thread pub sub sliding-buffer mix admix unmix]]
    [clojure.set :refer [subset?]]
-   [starnet.aux.nrepl :refer [start-nrepl-server]]
+   [starnet.nrepl :refer [start-nrepl-server]]
    [clojure.spec.alpha :as s]
    [clojure.spec.test.alpha :as stest]
 
@@ -17,7 +17,7 @@
    #_[starnet.app.pad.all]
    [starnet.common.pad.async2]
    [starnet.common.pad.datascript1]
-   [starnet.common.alpha.game.core]
+   [starnet.game]
    [starnet.common.pad.transducers1]
 
    [starnet.core :as appcore]

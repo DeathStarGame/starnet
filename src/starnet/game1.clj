@@ -1,4 +1,4 @@
-(ns starnet.common.pad.game1
+(ns starnet.game1
   (:require
    [clojure.repl :refer [doc]]
    [clojure.spec.alpha :as s]
@@ -6,9 +6,9 @@
    [clojure.spec.test.alpha :as stest]
    [clojure.test.check.generators :as gen]
    [clojure.test.check.properties :as prop]
-   [starnet.common.alpha.core :refer [make-inst with-gen-fmap]]
-   #?(:cljs [starnet.common.alpha.macros :refer-macros [defmethod-set]]
-      :clj  [starnet.common.alpha.macros :refer [defmethod-set]])
+   [starnet.impl :refer [make-inst with-gen-fmap]]
+   #?(:cljs [starnet.macros :refer-macros [defmethod-set]]
+      :clj  [starnet.macros :refer [defmethod-set]])
 
    [clojure.core.logic.nominal :exclude [fresh hash] :as nom]
    [clojure.core.logic :exclude [is] :as l :rename {== ?==} :refer :all]

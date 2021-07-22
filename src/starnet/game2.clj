@@ -1,4 +1,4 @@
-(ns starnet.common.alpha.game
+(ns starnet.game2
   (:require
    [clojure.repl :refer [doc]]
    [clojure.core.async :as a :refer [<! >!  timeout chan alt! go
@@ -9,13 +9,13 @@
    [clojure.spec.test.alpha :as stest]
    [clojure.test.check.generators :as gen]
    [clojure.test.check.properties :as prop]
-   [starnet.common.alpha.core :refer [make-inst with-gen-fmap]]
+   [starnet.impl :refer [make-inst with-gen-fmap]]
    [clojure.test :as test :refer [is are run-all-tests testing deftest run-tests]]
    [clojure.walk :as walk]
    [datascript.core :as d]
    #?(:cljs [reagent.core :as r])
-   #?(:cljs [starnet.common.alpha.macros :refer-macros [defmethod-set derive-set]]
-      :clj  [starnet.common.alpha.macros :refer [defmethod-set derive-set]])))
+   #?(:cljs [starnet.macros :refer-macros [defmethod-set derive-set]]
+      :clj  [starnet.macros :refer [defmethod-set derive-set]])))
 
 
 

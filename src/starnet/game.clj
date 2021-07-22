@@ -1,4 +1,4 @@
-(ns starnet.common.alpha.game.core
+(ns starnet.game
   (:require
    [clojure.repl :refer [doc]]
    [clojure.core.async :as a :refer [<! >!  timeout chan alt! go
@@ -11,8 +11,8 @@
    [clojure.test.check.properties :as prop]
    
    [starnet.common.alpha.spec]
-   [starnet.common.alpha.core :refer [make-inst with-gen-fmap]]
-   [starnet.common.alpha.macros :refer [defmethod-set derive-set]]
+   [starnet.impl :refer [make-inst with-gen-fmap]]
+   [starnet.macros :refer [defmethod-set derive-set]]
    [clojure.test :as test :refer [is are run-all-tests testing deftest run-tests]]))
 
 

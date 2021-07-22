@@ -1,4 +1,4 @@
-(ns starnet.common.alpha.macros
+(ns starnet.macros
   (:require
    [clojure.spec.alpha :as s]
    [clojure.spec.gen.alpha :as sgen]
