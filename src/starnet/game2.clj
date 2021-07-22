@@ -10,8 +10,7 @@
    [clojure.test.check.properties :as prop]
    [starnet.impl :refer [make-inst with-gen-fmap]]
    [clojure.walk :as walk]
-   [datascript.core :as d]
-   #?(:cljs [reagent.core :as r])))
+   [datascript.core :as d]))
 
 
 
@@ -385,48 +384,48 @@
      :ch-game-events ch-game-events
      :ch-inputs ch-inputs}))
 
-#?(:cljs (defn make-store
-           ([]
-            (make-store {}))
-           ([opts]
-            (let [state (make-state opts)
-                  state* (r/atom state)
-                  map* (r/atom {:m/status :initial})
-                  entities* (r/cursor map* [:m/entities])
-                  count-entities* (r/track! (fn []
-                                              (let [xs @entities*]
-                                                (when xs
-                                                  (count xs)))))]
-              (merge
-               state
-               {:ra.g/state state*
-                :ra.g/map map*
-                :ra.g/entities entities*
-                :ra.g/count-entities count-entities*
-                :db/ds nil})))))
+(defn make-store
+  ([]
+   (make-store {}))
+  ([opts]
+   (let [state (make-state opts)
+         state* (r/atom state)
+         map* (r/atom {:m/status :initial})
+         entities* (r/cursor map* [:m/entities])
+         count-entities* (r/track! (fn []
+                                     (let [xs @entities*]
+                                       (when xs
+                                         (count xs)))))]
+     (merge
+      state
+      {:ra.g/state state*
+       :ra.g/map map*
+       :ra.g/entities entities*
+       :ra.g/count-entities count-entities*
+       :db/ds nil}))))
 
 ;for repl only
 (defonce ^:private -store nil)
 (defonce ^:private -channels nil)
-#?(:cljs (defn proc-game
-           [{:keys [ch-game ch-game-events ch-inputs] :as channels} store-arg]
-           (set! -store store-arg)
-           (set! -channels channels)
-           (let []
-             (go (loop [store store-arg]
-                   (if-let [[v port] (alts! [ch-game-events ch-inputs])]
-                     (condp = port
-                       ch-game-events (let [store- (next-state store nil v
-                                                               '([:ev/event #{:plain}]
-                                                                 #{:plain}
-                                                                 [:ev/event #{:derived}]
-                                                                 #{:derived}))]
-                                        (set! -store store-)
-                                        (recur store-))
-                       ch-inputs (let []
-                                   (println v)
-                                   (recur store)))))
-                 (println "proc-game closing")))))
+(defn proc-game
+  [{:keys [ch-game ch-game-events ch-inputs] :as channels} store-arg]
+  (set! -store store-arg)
+  (set! -channels channels)
+  (let []
+    (go (loop [store store-arg]
+          (if-let [[v port] (alts! [ch-game-events ch-inputs])]
+            (condp = port
+              ch-game-events (let [store- (next-state store nil v
+                                                      '([:ev/event #{:plain}]
+                                                        #{:plain}
+                                                        [:ev/event #{:derived}]
+                                                        #{:derived}))]
+                               (set! -store store-)
+                               (recur store-))
+              ch-inputs (let []
+                          (println v)
+                          (recur store)))))
+        (println "proc-game closing"))))
 
 (comment
 
@@ -461,35 +460,34 @@
 
 (def ra-game-state (r/atom {:status :initial}))
 
-#?(:cljs
-   (defn rc-game
-     [channels ratoms]
-     (let [{:keys [ch-inputs]} channels
-           uuid* (r/cursor (ratoms :ra.g/state) [:g/uuid])
-           status* (r/cursor (ratoms :ra.g/state) [:g/status])
-           m-status* (r/cursor (ratoms :ra.g/map) [:m/status])
-           ra-game-state-status* (r/cursor ra-game-state [:status])
-           count-entities* (ratoms :ra.g/count-entities)
-           timer* (r/atom 0)
-           _ (go (loop []
-                   (<! (timeout 1000))
-                   (swap! timer* inc)
-                   (recur)))]
-       (fn [_ _]
-         (let [uuid @uuid*
-               status @status*
-               m-status  @m-status* #_(-> @(ratoms :ra.g/map) :m/status)
-               count-entities @count-entities*
-               ra-game-state-status @ra-game-state-status*
-               timer @timer*]
-           [:<>
-            [:div "rc-game"]
-            [:div  uuid]
-            [:div  [:span "game status: "] [:span status]]
-            [:div  [:span "map status: "] [:span (str m-status)]]
-            [:div  [:span "total entities: "] [:span count-entities]]
-            [:div  [:span "ra-game-state status: "] [:span ra-game-state-status]]
-            [:div  [:span "timer: "] [:span timer]]])))))
+(defn rc-game
+  [channels ratoms]
+  (let [{:keys [ch-inputs]} channels
+        uuid* (r/cursor (ratoms :ra.g/state) [:g/uuid])
+        status* (r/cursor (ratoms :ra.g/state) [:g/status])
+        m-status* (r/cursor (ratoms :ra.g/map) [:m/status])
+        ra-game-state-status* (r/cursor ra-game-state [:status])
+        count-entities* (ratoms :ra.g/count-entities)
+        timer* (r/atom 0)
+        _ (go (loop []
+                (<! (timeout 1000))
+                (swap! timer* inc)
+                (recur)))]
+    (fn [_ _]
+      (let [uuid @uuid*
+            status @status*
+            m-status  @m-status* #_(-> @(ratoms :ra.g/map) :m/status)
+            count-entities @count-entities*
+            ra-game-state-status @ra-game-state-status*
+            timer @timer*]
+        [:<>
+         [:div "rc-game"]
+         [:div  uuid]
+         [:div  [:span "game status: "] [:span status]]
+         [:div  [:span "map status: "] [:span (str m-status)]]
+         [:div  [:span "total entities: "] [:span count-entities]]
+         [:div  [:span "ra-game-state status: "] [:span ra-game-state-status]]
+         [:div  [:span "timer: "] [:span timer]]]))))
 
 (comment
 

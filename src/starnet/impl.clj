@@ -5,10 +5,8 @@
    [clojure.spec.gen.alpha :as sgen]
    [clojure.test.check.generators :as gen]
    [clojure.test.check.properties :as prop]
-   #?(:cljs [goog.date :as gdate]))
-  #?(:clj
-     (:import
-      java.util.Date)))
+   (:import
+    java.util.Date))
 
 (comment
   
@@ -19,12 +17,10 @@
   )
 
 (defn str->int [s]
-  #?(:clj  (java.lang.Integer/parseInt s)
-     :cljs (js/parseInt s)))
+  (java.lang.Integer/parseInt s))
 
 (defn rand-uuid []
-  #?(:clj  (java.util.UUID/randomUUID)
-     :cljs (random-uuid)))
+  (java.util.UUID/randomUUID))
 
 (defn with-gen-cyclic
   "Same as s/with-gen, but gen-fn takes  [spec] as argument.
@@ -45,5 +41,4 @@
 (defn make-inst
   "Returns a damn inst"
   []
-  #?(:clj (java.util.Date.)
-     :cljs (js/Date.)))
+  (java.util.Date.))
