@@ -8,9 +8,7 @@
    [clojure.spec.gen.alpha :as sgen]
    [clojure.test.check.generators :as gen]
    [clojure.test.check.properties :as prop]
-   [starnet.impl :refer [make-inst with-gen-fmap]]
-
-   [starnet.common.alpha.spec]))
+   [starnet.impl :refer [make-inst with-gen-fmap]]))
 
 (s/def :g/uuid uuid?)
 (s/def :g/events (s/coll-of :ev/event))

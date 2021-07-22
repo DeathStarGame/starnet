@@ -7,16 +7,11 @@
    [starnet.nrepl :refer [start-nrepl-server]]
    [clojure.spec.alpha :as s]
 
-   [starnet.common.alpha.spec]
    [starnet.spec]
-   [starnet.common.pad.all]
 
    [starnet.repl]
    #_[starnet.app.pad.all]
-   [starnet.common.pad.async2]
-   [starnet.common.pad.datascript1]
    [starnet.game]
-   [starnet.common.pad.transducers1]
 
    [starnet.core :as appcore]
    [clojure.java.shell :refer [sh]]

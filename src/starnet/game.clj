@@ -7,7 +7,6 @@
    [clojure.spec.alpha :as s]
    [clojure.spec.gen.alpha :as sgen]
 
-   [starnet.common.alpha.spec]
    [starnet.impl :refer [make-inst with-gen-fmap]]))
 
 
