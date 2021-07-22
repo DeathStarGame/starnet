@@ -1,4 +1,4 @@
-(ns starnet.app.alpha.http
+(ns starnet.http
   (:require
    [clojure.repl :refer [doc]]
    [clojure.core.async :as a :refer [<! >! <!! timeout chan alt! go
@@ -33,7 +33,7 @@
    [clojure.spec.gen.alpha :as sgen]
    [clojure.spec.test.alpha :as stest]
    [clojure.test.check.generators :as gen]
-   [starnet.app.alpha.core :as app.core])
+   [starnet.core :as app.core])
   (:import
    org.eclipse.jetty.websocket.api.Session
    java.io.ByteArrayInputStream
@@ -166,7 +166,7 @@
   ;https://github.com/pedestal/pedestal/blob/master/service/src/io/pedestal/test.clj
   ;http://pedestal.io/reference/parameters#_body_parameters
 
-  (def channels @(resolve 'starnet.app.alpha.main/channels))
+  (def channels @(resolve 'starnet.main/channels))
   (def app-ctx {:channels channels
                 :privkey (keys/private-key "resources/privkey.pem" (slurp "resources/passphrase.tmp"))
                 :pubkey (keys/public-key "resources/pubkey.pem")})

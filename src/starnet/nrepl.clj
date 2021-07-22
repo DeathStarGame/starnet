@@ -1,4 +1,4 @@
-(ns starnet.app.alpha.aux.nrepl
+(ns starnet.aux.nrepl
   (:require
    [nrepl.server :refer [start-server stop-server]]
    [clojure.repl :refer :all]

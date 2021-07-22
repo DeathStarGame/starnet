@@ -1,4 +1,4 @@
-(ns starnet.app.alpha.core
+(ns starnet.core
   (:require
    [clojure.repl :refer [doc]]
    [clojure.core.async :as a :refer [<! >! <!! timeout chan alt! go
@@ -106,7 +106,7 @@
 
 (comment
 
-  (def channels @(resolve 'starnet.app.alpha.main/channels))
+  (def channels @(resolve 'starnet.main/channels))
 
   ; all entities
   (repl-query channels '{:find [id]

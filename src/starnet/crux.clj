@@ -1,4 +1,4 @@
-(ns starnet.app.alpha.crux
+(ns starnet.crux
   (:require
    [clojure.repl :refer [doc]]
    [clojure.core.async :as a :refer [<! >! <!! timeout chan alt! go
@@ -6,7 +6,7 @@
                                      thread pub sub]]
    [crux.api :as crux]
    [clojure.java.io :as io]
-   [starnet.app.alpha.streams :refer [future-call-consumer]]))
+   [starnet.streams :refer [future-call-consumer]]))
 
 
 

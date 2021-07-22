@@ -1,17 +1,17 @@
-(ns starnet.app.alpha.repl
+(ns starnet.repl
   (:require
    [clojure.pprint :as pp]
    [clojure.spec.alpha :as s]
    [clojure.core.async :as a :refer [<! >! <!! timeout chan alt! go
                                      >!! <!! alt!! alts! alts!! take! put!
                                      thread pub sub]]
-   [starnet.app.alpha.streams :refer [produce-event
+   [starnet.streams :refer [produce-event
                                       future-call-consumer read-store
                                       send-event]])
   (:import
-   starnet.app.alpha.aux.serdes.TransitJsonSerializer
-   starnet.app.alpha.aux.serdes.TransitJsonDeserializer
-   starnet.app.alpha.aux.serdes.TransitJsonSerde
+   starnet.aux.serdes.TransitJsonSerializer
+   starnet.aux.serdes.TransitJsonDeserializer
+   starnet.aux.serdes.TransitJsonSerde
    org.apache.kafka.common.serialization.Serdes
    org.apache.kafka.streams.KafkaStreams
    org.apache.kafka.streams.StreamsBuilder
@@ -89,8 +89,8 @@
   (def p (KafkaProducer.
           {"bootstrap.servers" "broker1:9092"
            "auto.commit.enable" "true"
-           "key.serializer" "starnet.app.alpha.aux.serdes.TransitJsonSerializer"
-           "value.serializer" "starnet.app.alpha.aux.serdes.TransitJsonSerializer"}))
+           "key.serializer" "starnet.aux.serdes.TransitJsonSerializer"
+           "value.serializer" "starnet.aux.serdes.TransitJsonSerializer"}))
 
   (def state-user (create-streams-user))
   (def streams-user (:kstreams state-user))

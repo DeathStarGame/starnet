@@ -1,4 +1,4 @@
-(ns starnet.app.alpha.streams
+(ns starnet.streams
   (:require
    [clojure.repl :refer [doc]]
    [clojure.core.async :as a :refer [<! >! <!! timeout chan alt! go
@@ -14,10 +14,10 @@
    #_[starnet.common.alpha.game.state :refer [next-state]]
    [starnet.common.alpha.spec])
   (:import
-   starnet.app.alpha.aux.serdes.TransitJsonSerializer
-   starnet.app.alpha.aux.serdes.TransitJsonDeserializer
-   starnet.app.alpha.aux.serdes.TransitJsonSerde
-   starnet.app.alpha.aux.serdes.NippySerde
+   starnet.aux.serdes.TransitJsonSerializer
+   starnet.aux.serdes.TransitJsonDeserializer
+   starnet.aux.serdes.TransitJsonSerde
+   starnet.aux.serdes.NippySerde
 
    org.apache.kafka.common.serialization.Serdes
    org.apache.kafka.streams.KafkaStreams
@@ -165,8 +165,8 @@
            key-des
            value-des
            recordf]
-    :or {key-des "starnet.app.alpha.aux.serdes.TransitJsonDeserializer"
-         value-des "starnet.app.alpha.aux.serdes.TransitJsonDeserializer"}
+    :or {key-des "starnet.aux.serdes.TransitJsonDeserializer"
+         value-des "starnet.aux.serdes.TransitJsonDeserializer"}
     :as opts}]
   (future-call
    (fn []
@@ -252,8 +252,8 @@
     (let [props {"application.id" "alpha.access.streams"
                  "bootstrap.servers" "broker1:9092"
                  "auto.offset.reset" "earliest" #_"latest"
-                 "default.key.serde" "starnet.app.alpha.aux.serdes.TransitJsonSerde"
-                 "default.value.serde" "starnet.app.alpha.aux.serdes.TransitJsonSerde"
+                 "default.key.serde" "starnet.aux.serdes.TransitJsonSerde"
+                 "default.value.serde" "starnet.aux.serdes.TransitJsonSerde"
                  "topology.optimization" "all"}]
       (create-streams
        props
@@ -312,8 +312,8 @@
   (let [props {"application.id" "alpha.kstreams.crux-docs"
                "bootstrap.servers" "broker1:9092"
                "auto.offset.reset" "earliest" #_"latest"
-               "default.key.serde" "starnet.app.alpha.aux.serdes.NippySerde"
-               "default.value.serde" "starnet.app.alpha.aux.serdes.NippySerde"
+               "default.key.serde" "starnet.aux.serdes.NippySerde"
+               "default.value.serde" "starnet.aux.serdes.NippySerde"
                "topology.optimization" "all"}]
     (create-streams
      props
@@ -339,8 +339,8 @@
   (let [props {"application.id" "alpha.kstreams.game"
                "bootstrap.servers" "broker1:9092"
                "auto.offset.reset" "earliest" #_"latest"
-               "default.key.serde" "starnet.app.alpha.aux.serdes.TransitJsonSerde"
-               "default.value.serde" "starnet.app.alpha.aux.serdes.TransitJsonSerde"
+               "default.key.serde" "starnet.aux.serdes.TransitJsonSerde"
+               "default.value.serde" "starnet.aux.serdes.TransitJsonSerde"
                "topology.optimization" "all"}]
     (create-streams
      props
@@ -420,8 +420,8 @@
    {"application.id" "alpha.game.streams"
     "bootstrap.servers" "broker1:9092"
     "auto.offset.reset" "earliest" #_"latest"
-    "default.key.serde" "starnet.app.alpha.aux.serdes.TransitJsonSerde"
-    "default.value.serde" "starnet.app.alpha.aux.serdes.TransitJsonSerde"}
+    "default.key.serde" "starnet.aux.serdes.TransitJsonSerde"
+    "default.value.serde" "starnet.aux.serdes.TransitJsonSerde"}
    (fn []
      (let [builder (StreamsBuilder.)
            kstream (-> builder

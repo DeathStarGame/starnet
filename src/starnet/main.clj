@@ -1,38 +1,38 @@
-(ns starnet.app.alpha.main
+(ns starnet.main
   (:require
    [clojure.core.async :as a :refer [<! >! <!! timeout chan alt! go
                                      >!! <!! alt!! alts! alts!! take! put! mult tap untap
                                      thread pub sub sliding-buffer mix admix unmix]]
    [clojure.set :refer [subset?]]
-   [starnet.app.alpha.aux.nrepl :refer [start-nrepl-server]]
+   [starnet.aux.nrepl :refer [start-nrepl-server]]
    [clojure.spec.alpha :as s]
    [clojure.spec.test.alpha :as stest]
 
    [buddy.core.keys :as keys]
    
-   [starnet.app.alpha.aux.serdes]
+   [starnet.aux.serdes]
 
    [starnet.common.alpha.spec]
-   [starnet.app.alpha.spec]
+   [starnet.spec]
    [starnet.common.pad.all]
 
-   [starnet.app.alpha.repl]
-   [starnet.app.alpha.tests]
-   [starnet.app.alpha.crux]
-   [starnet.app.alpha.http]
+   [starnet.repl]
+   [starnet.tests]
+   [starnet.crux]
+   [starnet.http]
    #_[starnet.app.pad.all]
    [starnet.common.pad.async2]
    [starnet.common.pad.datascript1]
    [starnet.common.alpha.game.core]
    [starnet.common.pad.transducers1]
 
-   [starnet.app.alpha.streams :refer [create-topics-async list-topics
+   [starnet.streams :refer [create-topics-async list-topics
                                       delete-topics produce-event create-kvstore
                                       future-call-consumer read-store
                                       send-event  create-kstreams-game create-kstreams-crux-docs]]
-   [starnet.app.alpha.http  :as app-http]
-   [starnet.app.alpha.crux :as app-crux]
-   [starnet.app.alpha.core :as appcore]
+   [starnet.http  :as app-http]
+   [starnet.crux :as app-crux]
+   [starnet.core :as appcore]
    [clojure.java.shell :refer [sh]]
    [clojure.java.io :as io]
    [crux.api :as crux])
@@ -244,8 +244,8 @@
 
 (def kprops-producer {"bootstrap.servers" "broker1:9092"
                       "auto.commit.enable" "true"
-                      "key.serializer" "starnet.app.alpha.aux.serdes.TransitJsonSerializer"
-                      "value.serializer" "starnet.app.alpha.aux.serdes.TransitJsonSerializer"})
+                      "key.serializer" "starnet.aux.serdes.TransitJsonSerializer"
+                      "value.serializer" "starnet.aux.serdes.TransitJsonSerializer"})
 
 (defn proc-kproducer
   [{:keys [pb-sys ch-kproducer]}]

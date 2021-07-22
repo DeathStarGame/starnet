@@ -1,4 +1,4 @@
-(ns starnet.app.alpha.spec
+(ns starnet.spec
   (:require
    [clojure.spec.alpha :as s]
    [clojure.spec.gen.alpha :as gen]
@@ -20,19 +20,19 @@
 (s/def :instance/kconsumer #(instance? org.apache.kafka.clients.consumer.KafkaConsumer %))
 
 
-(s/fdef starnet.app.alpha.streams/produce-event
+(s/fdef starnet.streams/produce-event
   :args (s/cat :producer :instance/kproducer
                :topic string?
                :k (s/alt :uuid uuid? :string string?)
                :event :ev/event))
 
-(s/fdef starnet.app.alpha.streams/next-state-user
+(s/fdef starnet.streams/next-state-user
   :args (s/cat :state (s/nilable :u/user)
                :k uuid?
                :ev :ev.u/event)
   :ret (s/nilable :u/user))
 
-(s/fdef starnet.app.alpha.streams/next-game
+(s/fdef starnet.streams/next-game
   :args (s/cat :state (s/nilable :g/game)
                :k uuid?
                :ev :ev.g/event )
