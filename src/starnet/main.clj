@@ -6,14 +6,12 @@
    [clojure.set :refer [subset?]]
    [starnet.nrepl :refer [start-nrepl-server]]
    [clojure.spec.alpha :as s]
-   [clojure.spec.test.alpha :as stest]
 
    [starnet.common.alpha.spec]
    [starnet.spec]
    [starnet.common.pad.all]
 
    [starnet.repl]
-   [starnet.tests]
    #_[starnet.app.pad.all]
    [starnet.common.pad.async2]
    [starnet.common.pad.datascript1]

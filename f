@@ -7,10 +7,6 @@ compile(){
   clojure -A:core:dev:local -m starnet.compile
 }
 
-test(){
-  clojure -A:core:dev:local -m starnet.tests
-}
-
 dev(){
   compile
   clj -A:core:dev:local -m starnet.main

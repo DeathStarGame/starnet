@@ -1,8 +1,6 @@
 (ns starnet.spec
   (:require
-   [clojure.spec.alpha :as s]
-   [clojure.spec.gen.alpha :as gen]
-   [clojure.spec.test.alpha :as stest]))
+   [clojure.spec.alpha :as s]))
 
 (derive java.util.Map :isa/map)
 (derive java.util.Set :isa/set)

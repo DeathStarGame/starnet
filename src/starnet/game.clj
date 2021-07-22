@@ -6,13 +6,9 @@
                                      pub sub sliding-buffer mix admix unmix]]
    [clojure.spec.alpha :as s]
    [clojure.spec.gen.alpha :as sgen]
-   [clojure.spec.test.alpha :as stest]
-   [clojure.test.check.generators :as gen]
-   [clojure.test.check.properties :as prop]
-   
+
    [starnet.common.alpha.spec]
-   [starnet.impl :refer [make-inst with-gen-fmap]]
-   [clojure.test :as test :refer [is are run-all-tests testing deftest run-tests]]))
+   [starnet.impl :refer [make-inst with-gen-fmap]]))
 
 
 (defn make-state

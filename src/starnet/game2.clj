@@ -6,11 +6,9 @@
                                      pub sub sliding-buffer mix admix unmix]]
    [clojure.spec.alpha :as s]
    [clojure.spec.gen.alpha :as sgen]
-   [clojure.spec.test.alpha :as stest]
    [clojure.test.check.generators :as gen]
    [clojure.test.check.properties :as prop]
    [starnet.impl :refer [make-inst with-gen-fmap]]
-   [clojure.test :as test :refer [is are run-all-tests testing deftest run-tests]]
    [clojure.walk :as walk]
    [datascript.core :as d]
    #?(:cljs [reagent.core :as r])))
@@ -461,7 +459,7 @@
   ;;
   )
 
-(def ra-test (r/atom {:status :initial}))
+(def ra-game-state (r/atom {:status :initial}))
 
 #?(:cljs
    (defn rc-game
@@ -470,7 +468,7 @@
            uuid* (r/cursor (ratoms :ra.g/state) [:g/uuid])
            status* (r/cursor (ratoms :ra.g/state) [:g/status])
            m-status* (r/cursor (ratoms :ra.g/map) [:m/status])
-           ra-test-status* (r/cursor ra-test [:status])
+           ra-game-state-status* (r/cursor ra-game-state [:status])
            count-entities* (ratoms :ra.g/count-entities)
            timer* (r/atom 0)
            _ (go (loop []
@@ -482,7 +480,7 @@
                status @status*
                m-status  @m-status* #_(-> @(ratoms :ra.g/map) :m/status)
                count-entities @count-entities*
-               ra-test-status @ra-test-status*
+               ra-game-state-status @ra-game-state-status*
                timer @timer*]
            [:<>
             [:div "rc-game"]
@@ -490,20 +488,20 @@
             [:div  [:span "game status: "] [:span status]]
             [:div  [:span "map status: "] [:span (str m-status)]]
             [:div  [:span "total entities: "] [:span count-entities]]
-            [:div  [:span "ra-test status: "] [:span ra-test-status]]
+            [:div  [:span "ra-game-state status: "] [:span ra-game-state-status]]
             [:div  [:span "timer: "] [:span timer]]])))))
 
 (comment
 
   (go
-    (swap! ra-test assoc :status :starting)
+    (swap! ra-game-state assoc :status :starting)
     ;;  (<! (timeout 3000))
-    ;; (println "hello" (-> @ra-test :status))
+    ;; (println "hello" (-> @ra-game-state :status))
     (make-entities {})
-    (swap! ra-test assoc :status :started)
+    (swap! ra-game-state assoc :status :started)
     (make-entities {})
     ;; (<! (timeout 3000))
-    (swap! ra-test assoc :status :complete))
+    (swap! ra-game-state assoc :status :complete))
 
 
   ;;

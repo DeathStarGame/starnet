@@ -3,17 +3,14 @@
    [clojure.repl :refer [doc]]
    [clojure.spec.alpha :as s]
    [clojure.spec.gen.alpha :as sgen]
-   [clojure.spec.test.alpha :as stest]
    [clojure.test.check.generators :as gen]
-   [clojure.test.check.properties :as prop]
    [starnet.impl :refer [make-inst with-gen-fmap]]
 
    [clojure.core.logic.nominal :exclude [fresh hash] :as nom]
    [clojure.core.logic :exclude [is] :as l :rename {== ?==} :refer :all]
    [clojure.core.logic.pldb :as pldb :refer [db with-db db-rel db-fact]]
    [clojure.core.logic.fd  :as fd]
-   [clojure.core.logic.unifier :as u]
-   [clojure.test :as test :refer [is are run-all-tests testing deftest run-tests]]))
+   [clojure.core.logic.unifier :as u]))
 
 (s/def :g.e/uuid uuid?)
 (s/def :g.e/pos (s/tuple int? int?))
@@ -242,15 +239,12 @@
 (comment
 
   (ns-unmap *ns* 'next-state-game)
-  (stest/instrument [`next-state-game])
-  (stest/unstrument [`next-state-game])
 
   (gen/sample (s/gen :ev.g.u/update-role) 10)
   (gen/sample (s/gen :ev.g.u/create) 10)
   (gen/sample (s/gen :g.r/role) 10)
 
 
-  (stest/check `next-state-game)
 
   ;;
   )
